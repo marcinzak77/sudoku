@@ -1,0 +1,5 @@
+rootProject.name = 'com.sudoku'
+rootProject.name = 'com.sudoku'
+include 'game'
+findProject(':game')?.name = 'com.game'
+
