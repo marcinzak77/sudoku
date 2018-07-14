@@ -12,15 +12,15 @@ public class SudokuBoard {
 
     @Override
     public String toString() {
-        String lineWithEnter = " ----------------------------------" + "\n";
+        String lineWithEnter = " -------------------------" + "\n";
         String results = lineWithEnter;
-        Integer value;
+        String value;
         int rowNumber = 1;
 
             for (SudokuRow sudokuRow : sudokuBoard) {
                 int columnNumber = 0;
                 for (SudokuElement sudokuElement : sudokuRow.getSudokuElementsRow()) {
-                    value = sudokuElement.getValue();
+                    value = sudokuElement.toString();
                         if (columnNumber % 3 == 0) {
                             results += (" | " + value);
                         } else results += (" " + value);
