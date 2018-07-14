@@ -5,28 +5,33 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SudokuElement {
-    public static int EMPTY = -1;
+    public static Integer EMPTY = -1;
+    private List<Integer> elementValue = new ArrayList<>();
     private Integer value;
-    private List<Integer> possibleValues = new ArrayList<>();
 
-//    public SudokuElement(int newValue) {
-////        if (possibleValues.contains(newValue)) {
-////            value = newValue;
-////            possibleValues.remove(newValue);
-////        }
-//        // temporary 1
-//        value = 1;
+    public List<Integer> getElementValue() {
+         return elementValue;
+    }
+
+//    public void setValue(int value) {
+//        if (value >= 1 && value <= 9) {
+//            this.value = value;
+//        }
 //    }
+//
+    public Integer getValue() {
+        return value;
+    }
 
     public void setValue(int value) {
         this.value = value;
     }
 
-    public Integer getValue() {
-        return value;
+    public void setElementValue(List<Integer> elementValue) {
+        this.elementValue = elementValue;
     }
 
-    public List<Integer> getPossibleValues() {
-        return possibleValues;
-    }
+    //    public List<Integer> getPossibleValues() {
+//        return possibleValues;
+//    }
 }

@@ -3,12 +3,10 @@ package com.sudoku.board;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sudoku.board.SudokuElement.EMPTY;
-
 public class SudokuBoard {
-    private List<SudokuRow> sudokuBoard = new ArrayList<>();
+    private SudokuRow[] sudokuBoard = new SudokuRow[9];
 
-    public List<SudokuRow> getSudokuBoard() {
+    public SudokuRow[] getSudokuBoard() {
         return sudokuBoard;
     }
 
@@ -19,12 +17,10 @@ public class SudokuBoard {
         Integer value;
         int rowNumber = 1;
 
-
             for (SudokuRow sudokuRow : sudokuBoard) {
                 int columnNumber = 0;
                 for (SudokuElement sudokuElement : sudokuRow.getSudokuElementsRow()) {
                     value = sudokuElement.getValue();
-
                         if (columnNumber % 3 == 0) {
                             results += (" | " + value);
                         } else results += (" " + value);

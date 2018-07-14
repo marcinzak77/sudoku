@@ -6,17 +6,24 @@ public class CreateBoard {
 
     public SudokuBoard createEmptyBoard() {
         SudokuBoard sudokuBoard = new SudokuBoard();
-        SudokuRow sudokuRow = new SudokuRow();
+
         SudokuElement sudokuElement = new SudokuElement();
+
+//        sudokuElement.getElementValue(EMPTY);
+
 
         sudokuElement.setValue(EMPTY);
 
-        for (int i = 1; i <= 9; i++) {
-            sudokuRow.getSudokuElementsRow().add(sudokuElement);
-        }
+        for (int j = 0; j < 9; j++) {
+        SudokuRow sudokuRow = new SudokuRow();
 
-        for (int j = 1; j <= 9; j++) {
-            sudokuBoard.getSudokuBoard().add(sudokuRow);
+            for (int i = 0; i < 9; i++) {
+                sudokuElement = new SudokuElement();
+                sudokuElement.setValue(EMPTY);
+                sudokuRow.getSudokuElementsRow()[i] = sudokuElement;
+            }
+
+            sudokuBoard.getSudokuBoard()[j] = sudokuRow;
         }
 
         return sudokuBoard;

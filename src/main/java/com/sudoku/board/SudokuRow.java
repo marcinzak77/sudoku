@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuRow {
-    private List<SudokuElement> sudokuElementsRow = new ArrayList<>();
+    private SudokuElement[] sudokuElementsRow = new SudokuElement[9];
 
-    public List<SudokuElement> getSudokuElementsRow() {
+    public SudokuElement[] getSudokuElementsRow() {
         return sudokuElementsRow;
     }
 
-    public void setSudokuElementsRow(List<SudokuElement> sudokuElementsRow) {
+    public void setSudokuElementsRow(SudokuElement[] sudokuElementsRow) {
         this.sudokuElementsRow = sudokuElementsRow;
     }
+
 }
