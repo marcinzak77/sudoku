@@ -17,7 +17,7 @@ public class SudokuElement {
     }
 
     public void setValue(int value) {
-        if (value >= 1 && value <= 9) {
+        if ((value >= 1 && value <= 9) || value == EMPTY) {
             this.value = value;
         }
     }
@@ -31,6 +31,6 @@ public class SudokuElement {
         if (value.equals(EMPTY)) {
             return " ";
         }
-        return "" + value;
+        return value +"";
     }
 }
