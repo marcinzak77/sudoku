@@ -20,7 +20,7 @@ public class SudokuServiceTestSuite {
         //Then
         System.out.println("1 " + testBoard.getSudokuBoard());
         System.out.println("2 " + testBoard);
-       // printMessages.printBoard(testBoard);
+        printMessages.printBoard(testBoard);
 
 
     }
