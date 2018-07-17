@@ -12,7 +12,7 @@ public class SudokuBoard {
 
     @Override
     public String toString() {
-        String lineWithEnter = " ------------------------" + "\n";
+        String lineWithEnter = " -------------------------" + "\n";
         String results = lineWithEnter;
         String value;
         int rowNumber = 1;

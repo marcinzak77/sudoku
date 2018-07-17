@@ -7,7 +7,11 @@ import com.sudoku.board.SudokuRow;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.sudoku.board.SudokuElement.EMPTY;
+
 public class NumberValidator {
+
+    int currentColumn;
 
 
     public boolean checkValuesInSudokuRow(SudokuBoard sudokuBoard, int rowNumber, Integer newValue) {
@@ -124,6 +128,26 @@ public class NumberValidator {
                 return 9;
             }
          }
+    }
+
+    public boolean checkAllSudokuConditions(SudokuBoard sudokuBoard, int column, int row, int value) {
+
+        if (checkValuesInSudokuRow(sudokuBoard, row, value) || checkValuesInSudokuColumn(sudokuBoard,column, value)
+                || checkValuesInSudokuBox(sudokuBoard, row, column, value)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIsSudokuResolved(SudokuBoard sudokuBoard) {
+
+        for (SudokuRow sudokuRow: sudokuBoard.getSudokuBoard()) {
+            for (int i = 0; i < 9; i++) {
+                return !sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY);
+            }
+            currentColumn++;
+        }
+        return true;
     }
 
 

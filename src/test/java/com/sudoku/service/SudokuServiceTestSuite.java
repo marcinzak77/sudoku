@@ -6,10 +6,9 @@ import com.sudoku.board.SudokuElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import java.util.Arrays;
-
-public class SudokuServiceTestSuit {
+public class SudokuServiceTestSuite {
 
     @Test
     public void testPrintMessagesBoard() {
@@ -100,5 +99,40 @@ public class SudokuServiceTestSuit {
         Assert.assertEquals(true, results);
         Assert.assertEquals(true, results2);
         Assert.assertEquals(true, results3);
+    }
+
+    @Test
+    public void testCheckAllSudokuConditions() {
+        //Given
+        CreateBoard createBoard = new CreateBoard();
+        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        NumberValidator numberValidator = new NumberValidator();
+        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[0].setValue(6);
+
+        //When
+        boolean results = numberValidator.checkAllSudokuConditions(sudokuBoard, 0, 2, 5);
+        boolean results2 = numberValidator.checkAllSudokuConditions(sudokuBoard, 0, 2, 6);
+
+        //Then
+        System.out.println(sudokuBoard);
+        Assert.assertEquals(false, results);
+        Assert.assertEquals(true, results2);
+
+
+    }
+
+    @Test
+    public void testUserInteractionNewSudokuNumber() {
+        //Given
+        CreateBoard createBoard = new CreateBoard();
+        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        UserInteraction userInteraction = new UserInteraction();
+
+        //When
+       // userInteraction.enterNewSudokuNumber(sudokuBoard);
+
+        //Then
+        System.out.println(sudokuBoard);
+
     }
 }
