@@ -9,9 +9,6 @@ public class CreateBoard {
 
         SudokuElement sudokuElement = new SudokuElement();
 
-//        sudokuElement.getElementValue(EMPTY);
-
-
         sudokuElement.setValue(EMPTY);
 
         for (int j = 0; j < 9; j++) {

@@ -132,8 +132,11 @@ public class NumberValidator {
 
     public boolean checkAllSudokuConditions(SudokuBoard sudokuBoard, int column, int row, int value) {
 
-        if (checkValuesInSudokuRow(sudokuBoard, row, value) || checkValuesInSudokuColumn(sudokuBoard,column, value)
-                || checkValuesInSudokuBox(sudokuBoard, row, column, value)) {
+        if (checkValuesInSudokuRow(sudokuBoard, row, value)) {
+            return true;
+        } else  if (checkValuesInSudokuColumn(sudokuBoard,column, value)) {
+            return true;
+        } else if (checkValuesInSudokuBox(sudokuBoard, row, column, value)) {
             return true;
         }
         return false;

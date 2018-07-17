@@ -1,8 +1,5 @@
 package com.sudoku.board;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SudokuBoard {
     private SudokuRow[] sudokuBoard = new SudokuRow[9];
 

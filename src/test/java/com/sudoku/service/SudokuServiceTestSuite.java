@@ -4,9 +4,7 @@ import com.sudoku.board.CreateBoard;
 import com.sudoku.board.SudokuBoard;
 import com.sudoku.board.SudokuElement;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 public class SudokuServiceTestSuite {
 
@@ -32,24 +30,23 @@ public class SudokuServiceTestSuite {
         //Given
         CreateBoard createBoard = new CreateBoard();
         SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
-        SudokuElement sudokuElement = new SudokuElement();
-        SudokuElement sudokuElement2 = new SudokuElement();
         NumberValidator numberValidator = new NumberValidator();
 
-        sudokuElement.setValue(2);
-        sudokuElement2.setValue(1);
-
         sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[0].setValue(6);
-
         sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[2].setValue(5);
+        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[3].setValue(4);
+        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[4].setValue(8);
 
         //When
         boolean results = (numberValidator.checkValuesInSudokuRow(sudokuBoard, 0, 5));
         boolean results2 = (numberValidator.checkValuesInSudokuRow(sudokuBoard, 0, 7));
+        boolean results3 = (numberValidator.checkValuesInSudokuRow(sudokuBoard, 0, 4));
 
         //Then
         Assert.assertEquals(true, results);
         Assert.assertEquals(false, results2);
+        Assert.assertEquals(true, results3);
+        System.out.println(sudokuBoard);
     }
 
     @Test
@@ -111,25 +108,28 @@ public class SudokuServiceTestSuite {
 
         //When
         boolean results = numberValidator.checkAllSudokuConditions(sudokuBoard, 0, 2, 5);
-        boolean results2 = numberValidator.checkAllSudokuConditions(sudokuBoard, 0, 2, 6);
+        sudokuBoard.getSudokuBoard()[2].getSudokuElementsRow()[0].setValue(5);
+        boolean results2 = numberValidator.checkAllSudokuConditions(sudokuBoard, 1, 2, 6);
+        boolean results3 = numberValidator.checkAllSudokuConditions(sudokuBoard, 3, 2, 5);
 
         //Then
         System.out.println(sudokuBoard);
         Assert.assertEquals(false, results);
         Assert.assertEquals(true, results2);
+        Assert.assertEquals(true, results3);
 
 
     }
 
     @Test
-    public void testUserInteractionNewSudokuNumber() {
+    public void testFindAllSudokuNUmbers() {
         //Given
         CreateBoard createBoard = new CreateBoard();
         SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
         UserInteraction userInteraction = new UserInteraction();
 
         //When
-       // userInteraction.enterNewSudokuNumber(sudokuBoard);
+        userInteraction.findAllSudokuNumbers(sudokuBoard);
 
         //Then
         System.out.println(sudokuBoard);

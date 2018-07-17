@@ -10,7 +10,7 @@ public class PrintMessages {
     }
 
     public void printMovementInformation() {
-        System.out.println("Enter column, row and value separated by \" , \" (semicolon)");
+        System.out.println("Enter column, row and value separated by \",\" (semicolon)");
     }
 
     public void printMenu() {
