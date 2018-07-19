@@ -153,6 +153,15 @@ public class NumberValidator {
         return true;
     }
 
+    public SudokuBoard setValidSudokuNumber(SudokuBoard sudokuBoard, int column, int row, int value) {
+
+        if (!checkAllSudokuConditions(sudokuBoard, column, row, value)) {
+            sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[column].setValue(value);
+        }
+
+        return sudokuBoard;
+    }
+
 
 }
 

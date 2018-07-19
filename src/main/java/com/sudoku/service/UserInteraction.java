@@ -1,8 +1,12 @@
 package com.sudoku.service;
 
 import com.sudoku.board.SudokuBoard;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.sudoku.board.SudokuElement.EMPTY;
 
 
 public class UserInteraction {
@@ -34,22 +38,58 @@ public class UserInteraction {
 
     }
 
-    public void findAllSudokuNumbers(SudokuBoard sudokuBoard) {
+    public List<Integer> findAllExistingNumbersInRow(SudokuBoard sudokuBoard, int row) {
+        List<Integer> currentValues = new ArrayList<>();
+
+        for (int i = 0; i < 9; i++) {
+            int currentSudokuNumber = sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[i].getValue();
+
+            if (currentSudokuNumber!=EMPTY) {
+                currentValues.add(currentSudokuNumber);
+            }
+        }
+
+        return currentValues;
+
+    }
+
+    public void findAllSudokuNumbersInRow(SudokuBoard sudokuBoard, int row) {
         NumberValidator numberValidator = new NumberValidator();
 
-//        for (int i = 0; i < 9; i++) {
-//            for (int j = 0; j < 9; j++) {
-//
-//                    for (int k = 1; k <= 9; k++) {
-//
-//                        if (!numberValidator.checkAllSudokuConditions(sudokuBoard, i, j, k)) {
-//                            if (sudokuBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].getValue()==EMPTY) {
-//                                sudokuBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].setValue(k);
-//                        }
-//
-//                    }
-//                }
-//            }
-//        }
+        List<Integer> possibleValues = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+
+        System.out.println(findAllExistingNumbersInRow(sudokuBoard, row).size());
+        while (!possibleValues.isEmpty()) {
+
+            possibleValues.removeAll(findAllExistingNumbersInRow(sudokuBoard, row));
+
+            for (int i = 0; i < 9; i++) {
+
+                if (sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[i].getValue().equals(EMPTY)) {
+                    for (int j = 0; j < possibleValues.size(); j++) {
+                        int value = possibleValues.get(j);
+
+                        numberValidator.setValidSudokuNumber(sudokuBoard, i, row, value);
+                        possibleValues.remove(j);
+                        j = possibleValues.size();
+
+                    }
+
+                }
+
+            }
+        }
+
+        System.out.println("possible " + possibleValues);
+
+    }
+
+    public void findAllSudokuNumbers(SudokuBoard sudokuBoard) {
+
+        for (int i = 0; i < 9; i++) {
+            findAllSudokuNumbersInRow(sudokuBoard, i);
+        }
+
+
     }
 }

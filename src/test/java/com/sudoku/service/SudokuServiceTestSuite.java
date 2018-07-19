@@ -127,6 +127,7 @@ public class SudokuServiceTestSuite {
         CreateBoard createBoard = new CreateBoard();
         SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
         UserInteraction userInteraction = new UserInteraction();
+        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[0].setValue(6);
 
         //When
         userInteraction.findAllSudokuNumbers(sudokuBoard);
