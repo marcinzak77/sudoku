@@ -16,7 +16,7 @@ public class NumberValidator {
 
     public boolean checkValuesInSudokuRow(SudokuBoard sudokuBoard, int rowNumber, Integer newValue) {
 
-        for (SudokuElement sudokuElement: sudokuBoard.getSudokuBoard()[rowNumber].getSudokuElementsRow()) {
+        for (SudokuElement sudokuElement: sudokuBoard.getSudokuRows()[rowNumber].getSudokuElementsRow()) {
             if (sudokuElement.getValue().equals(newValue)) {
                 return true;
             }
@@ -26,7 +26,7 @@ public class NumberValidator {
 
     public boolean checkValuesInSudokuColumn(SudokuBoard sudokuBoard, int columnNumber, Integer newValue) {
 
-        for (SudokuRow sudokuRow: sudokuBoard.getSudokuBoard()) {
+        for (SudokuRow sudokuRow: sudokuBoard.getSudokuRows()) {
             if (sudokuRow.getSudokuElementsRow()[columnNumber].getValue().equals(newValue)) {
                 return true;
             }
@@ -52,7 +52,7 @@ public class NumberValidator {
 
         for (int i = startRow; i < (startRow + 3); i++) {
             for (int j = startColumn; j < (startColumn + 3); j++) {
-                allValuesInBox.add(sudokuBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].getValue());
+                allValuesInBox.add(sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue());
             }
         }
 
@@ -154,7 +154,7 @@ public class NumberValidator {
 
     public boolean checkIsSudokuResolved(SudokuBoard sudokuBoard) {
 
-        for (SudokuRow sudokuRow: sudokuBoard.getSudokuBoard()) {
+        for (SudokuRow sudokuRow: sudokuBoard.getSudokuRows()) {
             for (int i = 0; i < 9; i++) {
                 return !sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY);
             }
@@ -166,7 +166,7 @@ public class NumberValidator {
     public SudokuBoard setValidSudokuNumber(SudokuBoard sudokuBoard, int column, int row, int value) {
 
         if (!checkAllSudokuConditions(sudokuBoard, column, row, value)) {
-            sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[column].setValue(value);
+            sudokuBoard.getSudokuRows()[row].getSudokuElementsRow()[column].setValue(value);
         }
 
         return sudokuBoard;

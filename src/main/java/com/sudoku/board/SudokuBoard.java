@@ -1,12 +1,14 @@
 package com.sudoku.board;
 
-import java.util.HashSet;
-
 public class SudokuBoard extends Prototype {
-    private SudokuRow[] sudokuBoard = new SudokuRow[9];
+    private SudokuRow[] sudokuRows;
 
-    public SudokuRow[] getSudokuBoard() {
-        return sudokuBoard;
+    public SudokuRow[] getSudokuRows() {
+        return sudokuRows;
+    }
+
+    public SudokuBoard(SudokuRow[] sudokuRows) {
+        this.sudokuRows = sudokuRows;
     }
 
     @Override
@@ -16,7 +18,7 @@ public class SudokuBoard extends Prototype {
         String value;
         int rowNumber = 1;
 
-            for (SudokuRow sudokuRow : sudokuBoard) {
+            for (SudokuRow sudokuRow : sudokuRows) {
                 int columnNumber = 0;
                 for (SudokuElement sudokuElement : sudokuRow.getSudokuElementsRow()) {
                     value = sudokuElement.toString();
@@ -35,24 +37,8 @@ public class SudokuBoard extends Prototype {
             return results;
     }
 
-    public SudokuBoard deepCopy() throws CloneNotSupportedException {
-        SudokuBoard clonedBoard = (SudokuBoard)super.clone();
-        clonedBoard.sudokuBoard = new SudokuRow[9];
-
-
-        for (int i = 0; i < 9; i++) {
-            SudokuElement[] clonedRow = new SudokuElement[9];
-      //      clonedBoard.getSudokuBoard()[i].setSudokuElementsRow(clonedRow); //new
-
-            for (int j = 0; j < 9; j++) {
-                clonedRow[j].setValue(getSudokuBoard()[i].getSudokuElementsRow()[i].getValue());
-                //clonedBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].setValue();
-
-            }
-            clonedBoard.getSudokuBoard()[i].setSudokuElementsRow(clonedRow);
-
-        }
-
-        return clonedBoard;
+    public SudokuBoard deepCopy(SudokuBoard board) {
+        return new SudokuBoard(board.getSudokuRows());
     }
+
 }

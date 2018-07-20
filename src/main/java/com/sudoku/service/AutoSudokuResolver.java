@@ -2,7 +2,6 @@ package com.sudoku.service;
 
 import com.sudoku.board.SudokuBoard;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +15,7 @@ public class AutoSudokuResolver {
         List<Integer> currentValues = new ArrayList<>();
 
         for (int i = 0; i < 9; i++) {
-            int currentSudokuNumber = sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[i].getValue();
+            int currentSudokuNumber = sudokuBoard.getSudokuRows()[row].getSudokuElementsRow()[i].getValue();
 
             if (currentSudokuNumber != EMPTY) {
                 currentValues.add(currentSudokuNumber);
@@ -36,7 +35,7 @@ public class AutoSudokuResolver {
         while (possibleValues.iterator().hasNext()) {
 
             for (int i = 0; i < 9; i++) {
-                if (sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[i].getValue().equals(EMPTY)) {
+                if (sudokuBoard.getSudokuRows()[row].getSudokuElementsRow()[i].getValue().equals(EMPTY)) {
 
 
                     int value = possibleValues.iterator().next();
@@ -69,12 +68,12 @@ public class AutoSudokuResolver {
             for (int i = startRow; i < (startRow + 3); i++) {
                 for (int j = startColumn; j < (startColumn + 3); j++) {
                     System.out.println(sudokuBoard);
-                    if (sudokuBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
+                    if (sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
 
                         for (int value : possibleValues) {
                             numberValidator.setValidSudokuNumber(sudokuBoard, j, i, value);
 
-                            if (!sudokuBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
+                            if (!sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
                                 existingValues = numberValidator.getValuesFromSudokuBox(sudokuBoard, row, column);
                                 break;
                             }

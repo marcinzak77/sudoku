@@ -2,11 +2,8 @@ package com.sudoku.service;
 
 import com.sudoku.board.SudokuBoard;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.sudoku.board.SudokuElement.EMPTY;
 
 
 public class UserInteraction {
@@ -26,8 +23,8 @@ public class UserInteraction {
                 int value = Integer.parseInt(enteredValuesArray.get(2));
 
                 if (!numberValidator.checkAllSudokuConditions(sudokuBoard, column, row, value)) {
-                    sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[column].setValue(value);
-                    System.out.println(sudokuBoard.getSudokuBoard()[row].getSudokuElementsRow()[column].getValue());
+                    sudokuBoard.getSudokuRows()[row].getSudokuElementsRow()[column].setValue(value);
+                    System.out.println(sudokuBoard.getSudokuRows()[row].getSudokuElementsRow()[column].getValue());
                     printMessages.printBoard(sudokuBoard);
                 }
             } catch (Exception e) {

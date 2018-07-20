@@ -2,7 +2,6 @@ package com.sudoku.service;
 
 import com.sudoku.board.CreateBoard;
 import com.sudoku.board.SudokuBoard;
-import com.sudoku.board.SudokuElement;
 import org.junit.Test;
 
 public class SudokuBoardTestSuite {
@@ -17,7 +16,7 @@ public class SudokuBoardTestSuite {
         SudokuBoard testBoard = createBoard.createEmptyBoard();
 
         //Then
-        System.out.println("1 " + testBoard.getSudokuBoard());
+        System.out.println("1 " + testBoard.getSudokuRows());
         System.out.println("2 " + testBoard);
         printMessages.printBoard(testBoard);
 
@@ -29,23 +28,20 @@ public class SudokuBoardTestSuite {
         //Given
         CreateBoard createBoard = new CreateBoard();
         SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
-        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[3].setValue(6);
-        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[4].setValue(7);
-        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[5].setValue(8);
-        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[6].setValue(9);
-        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[7].setValue(1);
-        sudokuBoard.getSudokuBoard()[0].getSudokuElementsRow()[8].setValue(2);
-        sudokuBoard.getSudokuBoard()[1].getSudokuElementsRow()[8].setValue(3);
-        sudokuBoard.getSudokuBoard()[2].getSudokuElementsRow()[0].setValue(5);
+        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[3].setValue(6);
+        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[4].setValue(7);
+        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[5].setValue(8);
+        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[6].setValue(9);
+        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[7].setValue(1);
+        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[8].setValue(2);
+        sudokuBoard.getSudokuRows()[1].getSudokuElementsRow()[8].setValue(3);
+        sudokuBoard.getSudokuRows()[2].getSudokuElementsRow()[0].setValue(5);
 
         //When
-        SudokuBoard newBoard = null;
-        try {
-            newBoard = sudokuBoard.deepCopy();
+        SudokuBoard newBoard = sudokuBoard.deepCopy(sudokuBoard);
+        newBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(3);
 
-        } catch (CloneNotSupportedException e) {
-            System.out.println(e);
-        }
+
 
         //Then
         System.out.println(sudokuBoard);

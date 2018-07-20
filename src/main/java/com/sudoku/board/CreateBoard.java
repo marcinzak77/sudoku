@@ -5,7 +5,8 @@ import static com.sudoku.board.SudokuElement.EMPTY;
 public class CreateBoard {
 
     public SudokuBoard createEmptyBoard() {
-        SudokuBoard sudokuBoard = new SudokuBoard();
+        // SudokuBoard sudokuBoard = new SudokuBoard(); old
+        SudokuBoard sudokuBoard = new SudokuBoard(new SudokuRow[9]);
 
         SudokuElement sudokuElement = new SudokuElement();
 
@@ -20,7 +21,7 @@ public class CreateBoard {
                 sudokuRow.getSudokuElementsRow()[i] = sudokuElement;
             }
 
-            sudokuBoard.getSudokuBoard()[j] = sudokuRow;
+            sudokuBoard.getSudokuRows()[j] = sudokuRow;
         }
 
         return sudokuBoard;
