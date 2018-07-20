@@ -1,6 +1,8 @@
 package com.sudoku.board;
 
-public class SudokuBoard {
+import java.util.HashSet;
+
+public class SudokuBoard extends Prototype {
     private SudokuRow[] sudokuBoard = new SudokuRow[9];
 
     public SudokuRow[] getSudokuBoard() {
@@ -31,5 +33,26 @@ public class SudokuBoard {
 
             }
             return results;
+    }
+
+    public SudokuBoard deepCopy() throws CloneNotSupportedException {
+        SudokuBoard clonedBoard = (SudokuBoard)super.clone();
+        clonedBoard.sudokuBoard = new SudokuRow[9];
+
+
+        for (int i = 0; i < 9; i++) {
+            SudokuElement[] clonedRow = new SudokuElement[9];
+      //      clonedBoard.getSudokuBoard()[i].setSudokuElementsRow(clonedRow); //new
+
+            for (int j = 0; j < 9; j++) {
+                clonedRow[j].setValue(getSudokuBoard()[i].getSudokuElementsRow()[i].getValue());
+                //clonedBoard.getSudokuBoard()[i].getSudokuElementsRow()[j].setValue();
+
+            }
+            clonedBoard.getSudokuBoard()[i].setSudokuElementsRow(clonedRow);
+
+        }
+
+        return clonedBoard;
     }
 }
