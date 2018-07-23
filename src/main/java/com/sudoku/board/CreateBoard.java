@@ -5,18 +5,17 @@ import static com.sudoku.board.SudokuElement.EMPTY;
 public class CreateBoard {
 
     public SudokuBoard createEmptyBoard() {
-        // SudokuBoard sudokuBoard = new SudokuBoard(); old
         SudokuBoard sudokuBoard = new SudokuBoard(new SudokuRow[9]);
 
-        SudokuElement sudokuElement = new SudokuElement();
+      //  SudokuElement sudokuElement = new SudokuElement();
 
-        sudokuElement.setValue(EMPTY);
+      //  sudokuElement.setValue(EMPTY);
 
         for (int j = 0; j < 9; j++) {
         SudokuRow sudokuRow = new SudokuRow();
 
             for (int i = 0; i < 9; i++) {
-                sudokuElement = new SudokuElement();
+                SudokuElement sudokuElement = new SudokuElement();
                 sudokuElement.setValue(EMPTY);
                 sudokuRow.getSudokuElementsRow()[i] = sudokuElement;
             }

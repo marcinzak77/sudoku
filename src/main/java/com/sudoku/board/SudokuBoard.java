@@ -1,6 +1,6 @@
 package com.sudoku.board;
 
-public class SudokuBoard extends Prototype {
+public class SudokuBoard {
     private SudokuRow[] sudokuRows;
 
     public SudokuRow[] getSudokuRows() {
@@ -38,7 +38,22 @@ public class SudokuBoard extends Prototype {
     }
 
     public SudokuBoard deepCopy(SudokuBoard board) {
-        return new SudokuBoard(board.getSudokuRows());
+        SudokuBoard sudokuBoardCopy = new SudokuBoard(new SudokuRow[9]);
+        SudokuRow[] oldRow = board.getSudokuRows();
+
+        for (int j = 0; j < 9; j++) {
+            SudokuRow sudokuRow = new SudokuRow();
+
+            for (int i = 0; i < 9; i++) {
+                SudokuElement sudokuElement = new SudokuElement();
+                sudokuElement.setValue(oldRow[j].getSudokuElementsRow()[i].getValue());
+                sudokuRow.getSudokuElementsRow()[i] = sudokuElement;
+                }
+
+            sudokuBoardCopy.getSudokuRows()[j] = sudokuRow;
+        }
+
+        return sudokuBoardCopy;
     }
 
 }
