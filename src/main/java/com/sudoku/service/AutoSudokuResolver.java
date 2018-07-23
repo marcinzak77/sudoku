@@ -2,13 +2,11 @@ package com.sudoku.service;
 
 import com.sudoku.board.SudokuBoard;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.sudoku.board.SudokuElement.EMPTY;
 
-public class AutoSudokuResolver {
+public class AutoSudokuResolver{
     private NumberValidator numberValidator = new NumberValidator();
 
     public List<Integer> findAllExistingNumbersInRow(SudokuBoard sudokuBoard, int row) {
@@ -39,12 +37,12 @@ public class AutoSudokuResolver {
 
 
                     int value = possibleValues.iterator().next();
-                    //possibleValues.iterator().next().remove();
+
                     int numberInRow = findAllExistingNumbersInRow(sudokuBoard, row).size();
                     numberValidator.setValidSudokuNumber(sudokuBoard, i, row, value);
 
                     if (numberInRow < findAllExistingNumbersInRow(sudokuBoard, row).size()) {
-                        System.out.println("hit");
+
 
                         possibleValues.remove((Integer) value);
                         break;
@@ -55,71 +53,130 @@ public class AutoSudokuResolver {
         }
     }
 
+    public HashMap<Integer, Integer> findAmountOfPossiblities(SudokuBoard sudokuBoard, int row, int column, List<Integer> possibleValues) {
+        return null;
+    }
+
     public void findAllSudokuNumbersInBox(SudokuBoard sudokuBoard, int row, int column) {
         List<Integer> possibleValues = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         List<Integer> existingValues = numberValidator.getValuesFromSudokuBox(sudokuBoard, row, column);
+        HashMap<Integer, Integer> amountOfPossiblePlacements = new HashMap<>();
         possibleValues.removeAll(existingValues);
+        SudokuBoard backUpBoard = sudokuBoard.deepCopy(sudokuBoard);
+
 
         int startRow = numberValidator.getStartRowAndColumn(row, column)[0];
         int startColumn = numberValidator.getStartRowAndColumn(row, column)[1];
 
         while (!possibleValues.isEmpty()) {
 
-            for (int i = startRow; i < (startRow + 3); i++) {
-                for (int j = startColumn; j < (startColumn + 3); j++) {
-                    System.out.println(sudokuBoard);
-                    if (sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
+            for (Integer value: possibleValues) {
+                amountOfPossiblePlacements.put(value, 1);
+            }
 
-                        for (int value : possibleValues) {
-                            numberValidator.setValidSudokuNumber(sudokuBoard, j, i, value);
+            int counter = 0;
 
-                            if (!sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
-                                existingValues = numberValidator.getValuesFromSudokuBox(sudokuBoard, row, column);
-                                break;
+            for (int value : possibleValues) {
+                for (int i = startRow; i < (startRow + 3); i++) {
+                    for (int j = startColumn; j < (startColumn + 3); j++) {
+                        if (sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
+
+                                if (!numberValidator.checkAllSudokuConditions(sudokuBoard, j, i, value)) {
+                                    counter = amountOfPossiblePlacements.get(value);
+                                    counter++;
+                                    amountOfPossiblePlacements.put(value, counter);
+
                             }
                         }
+                    }
+                }
+            }
 
-                        possibleValues.removeAll(existingValues);
 
 
 
+        if (counter == 0) {
 
+            sudokuBoard = backUpBoard;
+        }
+
+
+            int currentNumber = possibleValues.get(0);
+            int currentAmount = amountOfPossiblePlacements.get(currentNumber);
+            for (Map.Entry<Integer, Integer> entry: amountOfPossiblePlacements.entrySet()) {
+                if (entry.getValue()<currentAmount) {
+                    currentAmount = entry.getValue();
+                    currentNumber = entry.getKey();
+                }
+            }
+
+
+
+            for (int i = startRow; i < (startRow + 3); i++) {
+                for (int j = startColumn; j < (startColumn + 3); j++) {
+
+                    if (sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
+
+                        numberValidator.setValidSudokuNumber(sudokuBoard, j, i, currentNumber);
+                        System.out.println(currentNumber + " " + currentAmount + " " + counter + " " + possibleValues);
+                        System.out.println(sudokuBoard);
+                        if (!sudokuBoard.getSudokuRows()[i].getSudokuElementsRow()[j].getValue().equals(EMPTY)) {
+                            existingValues = numberValidator.getValuesFromSudokuBox(sudokuBoard, row, column);
+                            amountOfPossiblePlacements.clear();
+                            possibleValues.removeAll(existingValues);
+                        }
                     }
                 }
             }
         }
+
+     //   return sudokuBoard;
     }
 
-
-
-
-    public boolean isSudokuInsertedCorecctly(List<Integer> previousValues, List<Integer> currentValues) {
-
-        if (previousValues.size()>currentValues.size()) {
+    public boolean isSudokuBoxResolved(List<Integer> possibleValues, List<Integer> existingValues) {
+        if (possibleValues.isEmpty()) {
             return true;
         }
         return false;
-
-        }
+    }
 
 
     public void findAllSudokuNumbers(SudokuBoard sudokuBoard) {
 
 
-        findAllSudokuNumbersInBox(sudokuBoard, 0,0);
-        findAllSudokuNumbersInBox(sudokuBoard, 3, 3);
-        findAllSudokuNumbersInBox(sudokuBoard, 0,3);
-        findAllSudokuNumbersInBox(sudokuBoard,3,6);
-        findAllSudokuNumbersInBox(sudokuBoard, 6,3);
-        findAllSudokuNumbersInBox(sudokuBoard,3,0);
-        System.out.println(sudokuBoard);
+             findAllSudokuNumbersInRow(sudokuBoard, 0);
+             findAllSudokuNumbersInBox(sudokuBoard, 3, 3);
+             findAllSudokuNumbersInRow(sudokuBoard, 3);
+             findAllSudokuNumbersInBox(sudokuBoard, 0,3);
+             findAllSudokuNumbersInRow(sudokuBoard, 1);
+             findAllSudokuNumbersInBox(sudokuBoard,6,3);
+             findAllSudokuNumbersInRow(sudokuBoard, 2);
+             findAllSudokuNumbersInBox(sudokuBoard,6,0);
+             findAllSudokuNumbersInRow(sudokuBoard, 6);
 
-        System.out.println(sudokuBoard);
-        findAllSudokuNumbersInBox(sudokuBoard,0,6);
-        System.out.println(sudokuBoard);
-        findAllSudokuNumbersInBox(sudokuBoard,6,6);
-        System.out.println(sudokuBoard);
-        findAllSudokuNumbersInBox(sudokuBoard,6,0);
+
+
+
+
+//           sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard, 3, 3);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard, 0,0);
+//           System.out.println(sudokuBoard);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard, 0,3);
+//           System.out.println(sudokuBoard);
+//        sudokuBoard =
+//           System.out.println(sudokuBoard);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard, 6,3);
+//           System.out.println(sudokuBoard);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard,3,0);
+//           System.out.println(sudokuBoard);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard,0,6);
+//           System.out.println(sudokuBoard);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard,6,6);
+//           System.out.println(sudokuBoard);
+//        sudokuBoard = findAllSudokuNumbersInBox(sudokuBoard,6,0);
+
+
+
 
     }
 }
