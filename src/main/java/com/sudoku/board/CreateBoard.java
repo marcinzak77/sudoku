@@ -7,11 +7,7 @@ public class CreateBoard {
     public SudokuBoard createEmptyBoard() {
         SudokuBoard sudokuBoard = new SudokuBoard(new SudokuRow[9]);
 
-      //  SudokuElement sudokuElement = new SudokuElement();
-
-      //  sudokuElement.setValue(EMPTY);
-
-        for (int j = 0; j < 9; j++) {
+     for (int j = 0; j < 9; j++) {
         SudokuRow sudokuRow = new SudokuRow();
 
             for (int i = 0; i < 9; i++) {

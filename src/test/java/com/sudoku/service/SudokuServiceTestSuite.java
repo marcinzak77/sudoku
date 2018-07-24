@@ -4,11 +4,17 @@ import com.sudoku.board.CreateBoard;
 import com.sudoku.board.SudokuBoard;
 import com.sudoku.board.SudokuElement;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class SudokuServiceTestSuite {
 
+    @Before
+    public void createSudokuBoard() {
+        CreateBoard createBoard = new CreateBoard();
 
+
+    }
 
     @Test
     public void testNumberValidatorCheckValuesInSudokuRow() {
@@ -127,7 +133,7 @@ public class SudokuServiceTestSuite {
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(6);
 
         //When
-        autoSudokuResolver.findAllSudokuNumbersInBox(sudokuBoard, 0, 0);
+      //  autoSudokuResolver.findAllSudokuNumbersInBox(sudokuBoard, 0, 0);
 
         //Then
         System.out.println(sudokuBoard);
@@ -137,22 +143,43 @@ public class SudokuServiceTestSuite {
     public void testFindAllSudokuNumbers() {
         //Given
         CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        SudokuBoard sudokuBoardOne = createBoard.createEmptyBoard();
+
+        String sudokuOne = "..............3.85..1.2.......5.7.....4...1...9.......5......73..2.1........4...9";
+
+        char[] charArray = sudokuOne.toCharArray();
+
+        int counter = 0;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (Character.isDigit(charArray[counter])) {
+                    int value = Character.getNumericValue(charArray[counter]);
+                    sudokuBoardOne.getSudokuRows()[i].getSudokuElementsRow()[j].setValue(value);
+                }
+                counter++;
+            }
+        }
+
+        System.out.println(sudokuBoardOne);
+
+        SudokuBoard sudokuBoard = sudokuBoardOne;
         AutoSudokuResolver autoSudokuResolver = new AutoSudokuResolver();
-        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(6);
-        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[7].setValue(1);
-        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[8].setValue(2);
-        sudokuBoard.getSudokuRows()[1].getSudokuElementsRow()[8].setValue(3);
-        sudokuBoard.getSudokuRows()[2].getSudokuElementsRow()[0].setValue(5);
-        sudokuBoard.getSudokuRows()[6].getSudokuElementsRow()[6].setValue(4);
-        sudokuBoard.getSudokuRows()[4].getSudokuElementsRow()[4].setValue(7);
-        sudokuBoard.getSudokuRows()[7].getSudokuElementsRow()[6].setValue(8);
+//        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(6);
+//        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[7].setValue(1);
+//        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[8].setValue(2);
+//        sudokuBoard.getSudokuRows()[1].getSudokuElementsRow()[8].setValue(3);
+//        sudokuBoard.getSudokuRows()[2].getSudokuElementsRow()[0].setValue(5);
+//        sudokuBoard.getSudokuRows()[6].getSudokuElementsRow()[6].setValue(4);
+//        sudokuBoard.getSudokuRows()[4].getSudokuElementsRow()[4].setValue(7);
+//        sudokuBoard.getSudokuRows()[7].getSudokuElementsRow()[6].setValue(8);
 
         //When
-        autoSudokuResolver.findAllSudokuNumbers(sudokuBoard);
+        sudokuBoard = autoSudokuResolver.findAllSudokuNumbers(sudokuBoard);
 
         //Then
         System.out.println(sudokuBoard);
 
     }
+
+
 }
