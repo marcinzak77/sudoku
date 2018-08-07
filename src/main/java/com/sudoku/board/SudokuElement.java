@@ -6,6 +6,7 @@ import java.util.List;
 public class SudokuElement {
     public static Integer EMPTY = -1;
     private List<Integer> elementValue = new ArrayList<>();
+    private List<Integer> possibleValue = new ArrayList<>();
     private Integer value;
 
     public List<Integer> getElementValue() {
@@ -24,6 +25,14 @@ public class SudokuElement {
 
     public void setElementValue(List<Integer> elementValue) {
         this.elementValue = elementValue;
+    }
+
+    public List<Integer> getPossibleValue() {
+        return possibleValue;
+    }
+
+    public void setPossibleValue(List<Integer> possibleValue) {
+        this.possibleValue = possibleValue;
     }
 
     @Override

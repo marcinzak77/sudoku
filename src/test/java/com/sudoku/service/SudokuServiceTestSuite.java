@@ -7,6 +7,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class SudokuServiceTestSuite {
 
     @Before
@@ -164,22 +168,12 @@ public class SudokuServiceTestSuite {
 
         SudokuBoard sudokuBoard = sudokuBoardOne;
         AutoSudokuResolver autoSudokuResolver = new AutoSudokuResolver();
-//        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(6);
-//        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[7].setValue(1);
-//        sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[8].setValue(2);
-//        sudokuBoard.getSudokuRows()[1].getSudokuElementsRow()[8].setValue(3);
-//        sudokuBoard.getSudokuRows()[2].getSudokuElementsRow()[0].setValue(5);
-//        sudokuBoard.getSudokuRows()[6].getSudokuElementsRow()[6].setValue(4);
-//        sudokuBoard.getSudokuRows()[4].getSudokuElementsRow()[4].setValue(7);
-//        sudokuBoard.getSudokuRows()[7].getSudokuElementsRow()[6].setValue(8);
 
         //When
-        sudokuBoard = autoSudokuResolver.findAllSudokuNumbers(sudokuBoard);
+        autoSudokuResolver.findAllSudokuNumbers(sudokuBoard);
 
         //Then
         System.out.println(sudokuBoard);
 
     }
-
-
 }

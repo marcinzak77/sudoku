@@ -156,22 +156,23 @@ public class NumberValidator {
 
         for (SudokuRow sudokuRow: sudokuBoard.getSudokuRows()) {
             for (int i = 0; i < 9; i++) {
-                return !sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY);
+                System.out.println(" check" + sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY));
+                return sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY);
             }
             currentColumn++;
         }
         return true;
     }
 
-    public SudokuBoard setValidSudokuNumber(SudokuBoard sudokuBoard, int column, int row, int value) {
+    public boolean setValidSudokuNumber(SudokuBoard sudokuBoard, int column, int row, int value) {
 
         if (!checkAllSudokuConditions(sudokuBoard, column, row, value)) {
             sudokuBoard.getSudokuRows()[row].getSudokuElementsRow()[column].setValue(value);
+            return true;
         }
 
-        return sudokuBoard;
+        return false;
     }
-
 
 }
 
