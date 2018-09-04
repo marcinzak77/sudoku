@@ -18,23 +18,23 @@ public class SudokuBoard {
         String value;
         int rowNumber = 1;
 
-            for (SudokuRow sudokuRow : sudokuRows) {
-                int columnNumber = 0;
-                for (SudokuElement sudokuElement : sudokuRow.getSudokuElementsRow()) {
-                    value = sudokuElement.toString();
-                        if (columnNumber % 3 == 0) {
-                            results += (" | " + value);
-                        } else results += (" " + value);
-                        columnNumber++;
-                }
-
-                if (rowNumber % 3 == 0) {
-                    results += " |" + "\n" + lineWithEnter;
-                } else results += " |" + "\n";
-                rowNumber++;
-
+        for (SudokuRow sudokuRow : sudokuRows) {
+            int columnNumber = 0;
+            for (SudokuElement sudokuElement : sudokuRow.getSudokuElementsRow()) {
+                value = sudokuElement.toString();
+                if (columnNumber % 3 == 0) {
+                    results += (" | " + value);
+                } else results += (" " + value);
+                columnNumber++;
             }
-            return results;
+
+            if (rowNumber % 3 == 0) {
+                results += " |" + "\n" + lineWithEnter;
+            } else results += " |" + "\n";
+            rowNumber++;
+
+        }
+        return results;
     }
 
     public SudokuBoard deepCopy(SudokuBoard board) {
@@ -48,7 +48,7 @@ public class SudokuBoard {
                 SudokuElement sudokuElement = new SudokuElement();
                 sudokuElement.setValue(oldRow[j].getSudokuElementsRow()[i].getValue());
                 sudokuRow.getSudokuElementsRow()[i] = sudokuElement;
-                }
+            }
 
             sudokuBoardCopy.getSudokuRows()[j] = sudokuRow;
         }

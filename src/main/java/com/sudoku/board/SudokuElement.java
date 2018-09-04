@@ -6,11 +6,11 @@ import java.util.List;
 public class SudokuElement {
     public static Integer EMPTY = -1;
     private List<Integer> elementValue = new ArrayList<>();
-    private List<Integer> possibleValue = new ArrayList<>();
+   // private List<Integer> possibleValue = new ArrayList<>();
     private Integer value;
 
     public List<Integer> getElementValue() {
-         return elementValue;
+        return elementValue;
     }
 
     public Integer getValue() {
@@ -27,19 +27,19 @@ public class SudokuElement {
         this.elementValue = elementValue;
     }
 
-    public List<Integer> getPossibleValue() {
-        return possibleValue;
-    }
+//    public List<Integer> getPossibleValue() {
+//        return possibleValue;
+//    }
 
-    public void setPossibleValue(List<Integer> possibleValue) {
-        this.possibleValue = possibleValue;
-    }
+//    public void setPossibleValue(List<Integer> possibleValue) {
+//        this.possibleValue = possibleValue;
+//    }
 
     @Override
     public String toString() {
         if (value.equals(EMPTY)) {
             return " ";
         }
-        return value +"";
+        return value + "";
     }
 }

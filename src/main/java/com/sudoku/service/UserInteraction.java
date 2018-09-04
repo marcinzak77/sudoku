@@ -11,7 +11,7 @@ public class UserInteraction {
     public boolean enterNewSudokuNumber(SudokuBoard sudokuBoard) {
         NumberValidator numberValidator = new NumberValidator();
         PrintMessages printMessages = new PrintMessages();
-        AutoSudokuResolver autoSudokuResolver = new AutoSudokuResolver();
+        SudokuResolver sudokuResolver = new SudokuResolver();
 
 
         if (!numberValidator.checkIsSudokuResolved(sudokuBoard)) {
@@ -20,14 +20,16 @@ public class UserInteraction {
             String enteredValues = KeyboardReader.getReadString().toUpperCase();
 
             switch (enteredValues) {
-                case "SUDOKU":  if(autoSudokuResolver.isSolutionForSudoku(sudokuBoard)) {
-                                     autoSudokuResolver.findAllSudokuNumbers(sudokuBoard);
-                                    return true;
+                case "SUDOKU":
+                    if (sudokuResolver.isSolutionForSudoku(sudokuBoard)) {
+                        sudokuResolver.findAllSudokuNumbers(sudokuBoard);
+                        return true;
 
-                               }
-                                break;
-                case "X":      return true;
-             }
+                    }
+                    break;
+                case "X":
+                    return true;
+            }
 
             try {
                 List<String> enteredValuesArray = Arrays.asList(enteredValues.split(","));

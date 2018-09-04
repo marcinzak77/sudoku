@@ -11,12 +11,12 @@ import static com.sudoku.board.SudokuElement.EMPTY;
 
 public class NumberValidator {
 
-    int currentColumn;
+    private int currentColumn;
 
 
     public boolean checkValuesInSudokuRow(SudokuBoard sudokuBoard, int rowNumber, Integer newValue) {
 
-        for (SudokuElement sudokuElement: sudokuBoard.getSudokuRows()[rowNumber].getSudokuElementsRow()) {
+        for (SudokuElement sudokuElement : sudokuBoard.getSudokuRows()[rowNumber].getSudokuElementsRow()) {
             if (sudokuElement.getValue().equals(newValue)) {
                 return true;
             }
@@ -26,7 +26,7 @@ public class NumberValidator {
 
     public boolean checkValuesInSudokuColumn(SudokuBoard sudokuBoard, int columnNumber, Integer newValue) {
 
-        for (SudokuRow sudokuRow: sudokuBoard.getSudokuRows()) {
+        for (SudokuRow sudokuRow : sudokuBoard.getSudokuRows()) {
             if (sudokuRow.getSudokuElementsRow()[columnNumber].getValue().equals(newValue)) {
                 return true;
             }
@@ -60,7 +60,7 @@ public class NumberValidator {
         return allValuesInBox;
     }
 
-    public int[] getStartRowAndColumn (int rowNumber, int columnNumber) {
+    private int[] getStartRowAndColumn(int rowNumber, int columnNumber) {
         int boxNumber = getSudokuBoxNumber(rowNumber, columnNumber);
         int startRow = 0;
         int startColumn = 0;
@@ -118,7 +118,7 @@ public class NumberValidator {
                 return 1;
             } else if (columnNumber < 6) {
                 return 2;
-            } else  {
+            } else {
                 return 3;
             }
         } else if (rowNumber < 6) {
@@ -126,7 +126,7 @@ public class NumberValidator {
                 return 4;
             } else if (columnNumber < 6) {
                 return 5;
-            } else  {
+            } else {
                 return 6;
             }
         } else {
@@ -134,17 +134,17 @@ public class NumberValidator {
                 return 7;
             } else if (columnNumber < 6) {
                 return 8;
-            } else  {
+            } else {
                 return 9;
             }
-         }
+        }
     }
 
     public boolean checkAllSudokuConditions(SudokuBoard sudokuBoard, int column, int row, int value) {
 
         if (checkValuesInSudokuRow(sudokuBoard, row, value)) {
             return true;
-        } else  if (checkValuesInSudokuColumn(sudokuBoard,column, value)) {
+        } else if (checkValuesInSudokuColumn(sudokuBoard, column, value)) {
             return true;
         } else if (checkValuesInSudokuBox(sudokuBoard, row, column, value)) {
             return true;
@@ -154,7 +154,7 @@ public class NumberValidator {
 
     public boolean checkIsSudokuResolved(SudokuBoard sudokuBoard) {
 
-        for (SudokuRow sudokuRow: sudokuBoard.getSudokuRows()) {
+        for (SudokuRow sudokuRow : sudokuBoard.getSudokuRows()) {
             for (int i = 0; i < 9; i++) {
                 System.out.println(" check" + sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY));
                 return sudokuRow.getSudokuElementsRow()[currentColumn].getElementValue().contains(EMPTY);

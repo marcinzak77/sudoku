@@ -1,6 +1,6 @@
 package com.sudoku.service;
 
-import com.sudoku.board.CreateBoard;
+import com.sudoku.board.BoardCreator;
 import com.sudoku.board.SudokuBoard;
 import org.junit.Test;
 
@@ -9,11 +9,11 @@ public class SudokuBoardTestSuite {
     @Test
     public void testPrintMessagesBoard() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
+        BoardCreator boardCreator = new BoardCreator();
         PrintMessages printMessages = new PrintMessages();
 
         //When
-        SudokuBoard testBoard = createBoard.createEmptyBoard();
+        SudokuBoard testBoard = boardCreator.createEmptyBoard();
 
         //Then
         System.out.println("1 " + testBoard.getSudokuRows());
@@ -26,8 +26,8 @@ public class SudokuBoardTestSuite {
     @Test
     public void testBoardDeepCopy() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoard = boardCreator.createEmptyBoard();
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[3].setValue(6);
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[4].setValue(7);
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[5].setValue(8);

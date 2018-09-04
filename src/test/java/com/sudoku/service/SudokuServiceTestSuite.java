@@ -1,21 +1,17 @@
 package com.sudoku.service;
 
-import com.sudoku.board.CreateBoard;
+import com.sudoku.board.BoardCreator;
 import com.sudoku.board.SudokuBoard;
 import com.sudoku.board.SudokuElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class SudokuServiceTestSuite {
 
     @Before
     public void createSudokuBoard() {
-        CreateBoard createBoard = new CreateBoard();
+        BoardCreator boardCreator = new BoardCreator();
 
 
     }
@@ -23,8 +19,8 @@ public class SudokuServiceTestSuite {
     @Test
     public void testNumberValidatorCheckValuesInSudokuRow() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoard = boardCreator.createEmptyBoard();
         NumberValidator numberValidator = new NumberValidator();
 
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(6);
@@ -47,8 +43,8 @@ public class SudokuServiceTestSuite {
     @Test
     public void testNumberValidatorCheckValues() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoard = boardCreator.createEmptyBoard();
         SudokuElement sudokuElement = new SudokuElement();
         SudokuElement sudokuElement2 = new SudokuElement();
         NumberValidator numberValidator = new NumberValidator();
@@ -72,8 +68,8 @@ public class SudokuServiceTestSuite {
     @Test
     public void testCheckValuesInSudokuBox() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoard = boardCreator.createEmptyBoard();
         NumberValidator numberValidator = new NumberValidator();
 
 
@@ -102,8 +98,8 @@ public class SudokuServiceTestSuite {
     @Test
     public void testCheckAllSudokuConditions() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoard = boardCreator.createEmptyBoard();
         NumberValidator numberValidator = new NumberValidator();
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[3].setValue(6);
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[4].setValue(7);
@@ -117,13 +113,12 @@ public class SudokuServiceTestSuite {
         //When
         boolean results = numberValidator.checkAllSudokuConditions(sudokuBoard, 7, 1, 5);
         boolean results2 = numberValidator.checkAllSudokuConditions(sudokuBoard, 5, 2, 6);
-        boolean results3 = numberValidator.checkAllSudokuConditions(sudokuBoard, 5, 2, 5);
+
 
         //Then
         System.out.println(sudokuBoard);
         Assert.assertEquals(false, results);
         Assert.assertEquals(true, results2);
-       // Assert.assertEquals(true, results3);
 
 
     }
@@ -131,13 +126,13 @@ public class SudokuServiceTestSuite {
     @Test
     public void testFindAllSudokuNumbersInBox() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoard = createBoard.createEmptyBoard();
-        AutoSudokuResolver autoSudokuResolver = new AutoSudokuResolver();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoard = boardCreator.createEmptyBoard();
+        SudokuResolver sudokuResolver = new SudokuResolver();
         sudokuBoard.getSudokuRows()[0].getSudokuElementsRow()[0].setValue(6);
 
         //When
-      //  autoSudokuResolver.findAllSudokuNumbersInBox(sudokuBoard, 0, 0);
+        //  sudokuResolver.findAllSudokuNumbersInBox(sudokuBoard, 0, 0);
 
         //Then
         System.out.println(sudokuBoard);
@@ -146,8 +141,8 @@ public class SudokuServiceTestSuite {
     @Test
     public void testFindAllSudokuNumbers() {
         //Given
-        CreateBoard createBoard = new CreateBoard();
-        SudokuBoard sudokuBoardOne = createBoard.createEmptyBoard();
+        BoardCreator boardCreator = new BoardCreator();
+        SudokuBoard sudokuBoardOne = boardCreator.createEmptyBoard();
 
         String sudokuOne = "..............3.85..1.2.......5.7.....4...1...9.......5......73..2.1........4...9";
 
@@ -167,10 +162,10 @@ public class SudokuServiceTestSuite {
         System.out.println(sudokuBoardOne);
 
         SudokuBoard sudokuBoard = sudokuBoardOne;
-        AutoSudokuResolver autoSudokuResolver = new AutoSudokuResolver();
+        SudokuResolver sudokuResolver = new SudokuResolver();
 
         //When
-        autoSudokuResolver.findAllSudokuNumbers(sudokuBoard);
+        sudokuResolver.findAllSudokuNumbers(sudokuBoard);
 
         //Then
         System.out.println(sudokuBoard);
